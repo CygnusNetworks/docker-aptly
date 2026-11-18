@@ -43,4 +43,4 @@ jobs:
         run: |
           set -euo pipefail
           docker run --rm aptly:ci aptly version
-          docker run --rm aptly:ci sh -c 'command -v gpg gpg-agent gpgv curl'
+          docker run --rm aptly:ci sh -c 'command -v gpg gpg-agent gpgv curl bzip2 xz'

@@ -36,10 +36,10 @@ LABEL org.opencontainers.image.title="aptly" \
       org.cygnusnetworks.aptly-version="${APTLY_VERSION}" \
       org.cygnusnetworks.build-recipe="${BUILD_RECIPE}"
 
-# gnupg (gpg, gpg-agent) is called by aptly for signing; gpgv verifies signatures; curl is used by the healthcheck
+# gnupg (gpg, gpg-agent) is called by aptly for signing; gpgv verifies signatures; bzip2 and xz-utils are called to compress the published index files; curl is used by the healthcheck
 RUN set -eux; \
     apt-get update; \
-    apt-get install -y --no-install-recommends ca-certificates curl gnupg gpgv; \
+    apt-get install -y --no-install-recommends ca-certificates curl gnupg gpgv bzip2 xz-utils; \
     rm -rf /var/lib/apt/lists/*
 
 COPY --from=fetch /usr/local/bin/aptly /usr/local/bin/aptly
