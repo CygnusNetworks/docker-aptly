@@ -58,7 +58,12 @@ services:
     ports:
       - 127.0.0.1:8082:80
     volumes:
-      - aptly_data:/usr/share/nginx/html:ro   # serves the whole root dir; restrict to public/ via your nginx config
+      - type: volume
+        source: aptly_data
+        target: /opt/aptly/public
+        read_only: true
+        volume:
+          subpath: public   # requires Docker Engine 26+; the web server only sees the published repositories
 volumes:
   aptly_data:
 ```
